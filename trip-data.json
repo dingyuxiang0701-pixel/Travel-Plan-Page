@@ -1,6 +1,7 @@
 {
   "$schema": "./schemas/trip-data.schema.json",
   "schemaVersion": "2.0-lite",
+
   "config": {
     "schemaVersion": "1.0.0",
     "modules": {
@@ -20,8 +21,7 @@
   "metadata": {
     "tripId": "spain-2026",
     "title": "Spain 2026 🇪🇸",
-    "language": "zh-CN",
-    "assets": {}
+    "timeZone": "Europe/Madrid"
   },
 
   "trip": {
@@ -29,18 +29,33 @@
     "startDate": "2026-09-18",
     "endDate": "2026-09-28",
     "dayCount": 11,
-    "nightCountAway": 10,
+
     "countries": [
-      "Australia",
-      "China",
-      "Spain"
+      {
+        "code": "AU",
+        "name": "Australia",
+        "nameZh": "澳大利亚",
+        "nameEn": "Australia"
+      },
+      {
+        "code": "CN",
+        "name": "China",
+        "nameZh": "中国",
+        "nameEn": "China"
+      },
+      {
+        "code": "ES",
+        "name": "Spain",
+        "nameZh": "西班牙",
+        "nameEn": "Spain"
+      }
     ],
+
     "primaryDestinationCountries": [
-      "Spain"
+      "ES"
     ],
+
     "citiesAndAreas": [
-      "Melbourne",
-      "Shanghai",
       "Madrid",
       "Lugo",
       "San Román",
@@ -49,115 +64,176 @@
       "O Pedrouzo",
       "Santiago de Compostela"
     ],
-    "routeSummary": "Melbourne → Shanghai → Madrid → Lugo → San Román → Melide → Arzúa → O Pedrouzo → Santiago de Compostela → Madrid → Shanghai",
-    "groupSize": 1
+
+    "routeSummary": "Madrid → Lugo → San Román → Melide → Arzúa → O Pedrouzo → Santiago de Compostela → Madrid"
   },
 
   "flightJourneys": [
     {
       "id": "outbound-spain",
-      "label": "Melbourne → Madrid",
-      "segments": [
-        {
-          "date": "2026-09-18",
-          "flightNumber": "MU738",
-          "airline": "China Eastern Airlines",
-          "from": "Melbourne Airport T2",
-          "to": "Shanghai Pudong International Airport T1",
-          "departure": "11:00",
-          "arrival": "19:50",
-          "departureTimeZone": "Australia/Melbourne",
-          "arrivalTimeZone": "Asia/Shanghai"
-        },
-        {
-          "date": "2026-09-19",
-          "flightNumber": "MU709",
-          "airline": "China Eastern Airlines",
-          "from": "Shanghai Pudong International Airport T1",
-          "to": "Madrid Barajas Airport T1",
-          "departure": "00:45",
-          "arrival": "08:40",
-          "departureTimeZone": "Asia/Shanghai",
-          "arrivalTimeZone": "Europe/Madrid"
-        }
-      ]
+      "title": "墨尔本 → 马德里"
     },
-
     {
-      "id": "return-from-spain",
-      "label": "Madrid → Shanghai",
-      "segments": [
-        {
-          "date": "2026-09-28",
-          "flightNumber": "MU710",
-          "airline": "China Eastern Airlines",
-          "from": "Madrid Barajas Airport T1",
-          "to": "Shanghai Pudong International Airport T1",
-          "departure": "11:05",
-          "arrival": "05:40",
-          "arrivalDate": "2026-09-29",
-          "departureTimeZone": "Europe/Madrid",
-          "arrivalTimeZone": "Asia/Shanghai"
-        }
-      ]
+      "id": "return-spain",
+      "title": "马德里 → 上海"
     }
   ],
 
-  "flights": [],
+  "flights": [
+    {
+      "id": "mu738",
+      "journeyId": "outbound-spain",
+      "sequence": 1,
+      "flightNumber": "MU738",
+
+      "airline": {
+        "name": "China Eastern Airlines",
+        "nameZh": "中国东方航空"
+      },
+
+      "departure": {
+        "date": "2026-09-18",
+        "time": "11:00",
+        "airportCode": "MEL",
+        "airportName": "Melbourne Airport",
+        "city": "Melbourne",
+        "terminal": "T2",
+        "utcOffset": "+10:00"
+      },
+
+      "arrival": {
+        "date": "2026-09-18",
+        "time": "19:50",
+        "airportCode": "PVG",
+        "airportName": "Shanghai Pudong International Airport",
+        "city": "Shanghai",
+        "terminal": "T1",
+        "utcOffset": "+08:00"
+      }
+    },
+
+    {
+      "id": "mu709",
+      "journeyId": "outbound-spain",
+      "sequence": 2,
+      "flightNumber": "MU709",
+
+      "airline": {
+        "name": "China Eastern Airlines",
+        "nameZh": "中国东方航空"
+      },
+
+      "connectionFromPrevious": {
+        "plannedDurationText": "上海中转 4小时55分"
+      },
+
+      "departure": {
+        "date": "2026-09-19",
+        "time": "00:45",
+        "airportCode": "PVG",
+        "airportName": "Shanghai Pudong International Airport",
+        "city": "Shanghai",
+        "terminal": "T1",
+        "utcOffset": "+08:00"
+      },
+
+      "arrival": {
+        "date": "2026-09-19",
+        "time": "08:40",
+        "airportCode": "MAD",
+        "airportName": "Adolfo Suárez Madrid-Barajas Airport",
+        "city": "Madrid",
+        "terminal": "T1",
+        "utcOffset": "+02:00"
+      }
+    },
+
+    {
+      "id": "mu710",
+      "journeyId": "return-spain",
+      "sequence": 1,
+      "flightNumber": "MU710",
+
+      "airline": {
+        "name": "China Eastern Airlines",
+        "nameZh": "中国东方航空"
+      },
+
+      "departure": {
+        "date": "2026-09-28",
+        "time": "11:05",
+        "airportCode": "MAD",
+        "airportName": "Adolfo Suárez Madrid-Barajas Airport",
+        "city": "Madrid",
+        "terminal": "T1",
+        "utcOffset": "+02:00"
+      },
+
+      "arrival": {
+        "date": "2026-09-29",
+        "time": "05:40",
+        "airportCode": "PVG",
+        "airportName": "Shanghai Pudong International Airport",
+        "city": "Shanghai",
+        "terminal": "T1",
+        "utcOffset": "+08:00"
+      }
+    }
+  ],
 
   "accommodations": [
     {
-      "id": "lugo-hotel",
+      "id": "hotel-lugo",
       "name": "Sercotel EsteOeste",
-      "city": "Lugo",
+      "cityOrArea": "Lugo",
       "checkIn": "2026-09-19",
       "checkOut": "2026-09-20",
       "address": "1 Praza de Santo Domingo, 27001 Lugo, Spain"
     },
     {
-      "id": "san-roman-hotel",
+      "id": "hotel-san-roman",
       "name": "O Lar do Alecrín",
-      "city": "San Román",
+      "cityOrArea": "San Román",
       "checkIn": "2026-09-20",
       "checkOut": "2026-09-21",
       "address": "BURGO 13, 27235 Friol, Spain"
     },
     {
-      "id": "melide-hotel",
+      "id": "hotel-melide",
       "name": "Pensión Praza das Coles",
-      "city": "Melide",
+      "cityOrArea": "Melide",
       "checkIn": "2026-09-21",
       "checkOut": "2026-09-22",
       "address": "1 Plaza Constitución, 15800 Melide, Spain"
     },
     {
-      "id": "arzua-hotel",
+      "id": "hotel-arzua",
       "name": "Pensión Boutique Maison Only",
-      "city": "Arzúa",
+      "cityOrArea": "Arzúa",
       "checkIn": "2026-09-22",
       "checkOut": "2026-09-23",
       "address": "Rúa Fraga do Rei 46, 15810 Arzúa, Spain"
     },
     {
-      "id": "o-pedrouzo-hotel",
+      "id": "hotel-pedrouzo",
       "name": "PR Una Estrella Dorada",
-      "city": "O Pedrouzo",
+      "cityOrArea": "O Pedrouzo",
       "checkIn": "2026-09-23",
       "checkOut": "2026-09-24",
       "address": "Avenida de Lugo n 10-1, 15821 O Pedrouzo, Spain"
     },
     {
-      "id": "santiago-hotel",
+      "id": "hotel-santiago",
       "name": "Rey Fernando",
-      "city": "Santiago de Compostela",
+      "cityOrArea": "Santiago de Compostela",
       "checkIn": "2026-09-24",
       "checkOut": "2026-09-25",
       "address": "Fernando III el Santo nº 30, 6º, 15701 Santiago de Compostela, Spain"
     },
     {
-      "id": "madrid-hotel",
+      "id": "hotel-madrid",
       "name": "Micampus Madrid Sinesio Delgado Student Residence",
-      "city": "Madrid",
+      "cityOrArea": "Madrid",
       "checkIn": "2026-09-25",
       "checkOut": "2026-09-28",
       "address": "13 Calle de Sinesio Delgado, Tetuan, 28029 Madrid, Spain"
@@ -166,16 +242,11 @@
 
   "groundTransport": {
     "rentalCar": null,
-    "rentalChecklist": [],
-    "drivingNotes": [],
-    "drivingReferenceLinks": [],
-    "plannedRoadLegs": [],
 
     "publicTransitAndRail": [
       {
-        "id": "madrid-lugo",
+        "id": "train-madrid-lugo",
         "date": "2026-09-19",
-        "type": "train",
         "operator": "Renfe",
         "service": "ALVIA 04325",
         "from": "Madrid Chamartín Clara Campoamor",
@@ -186,10 +257,10 @@
         "seat": "3A",
         "status": "booked"
       },
+
       {
-        "id": "santiago-madrid",
+        "id": "train-santiago-madrid",
         "date": "2026-09-25",
-        "type": "train",
         "operator": "Renfe",
         "service": "AVLO 04334",
         "from": "Santiago de Compostela",
@@ -198,8 +269,6 @@
         "arrival": "19:51",
         "coach": "4",
         "seat": "6A",
-        "price": 77.00,
-        "currency": "EUR",
         "status": "booked"
       }
     ]
@@ -207,240 +276,286 @@
 
   "days": [
     {
+      "day": 1,
+      "id": "day-01",
       "date": "2026-09-18",
-      "title": "✈️ Melbourne → Shanghai",
-      "location": "Melbourne → Shanghai",
-      "items": [
+      "title": "出发 · Melbourne → Shanghai",
+      "locations": ["Melbourne", "Shanghai"],
+
+      "schedule": [
         {
           "time": "11:00",
           "type": "flight",
-          "title": "MU738 · Melbourne → Shanghai",
-          "notes": "China Eastern Airlines · Melbourne Airport T2 → Shanghai Pudong T1"
+          "text": "MU738 · Melbourne T2 → Shanghai Pudong T1"
         },
         {
           "time": "19:50",
-          "type": "arrival",
-          "title": "抵达 Shanghai Pudong T1",
-          "notes": "Transfer in Shanghai."
+          "type": "flight",
+          "text": "抵达上海浦东机场 T1"
         }
       ]
     },
 
     {
+      "day": 2,
+      "id": "day-02",
       "date": "2026-09-19",
-      "title": "🇪🇸 抵达 Spain · Madrid → Lugo",
-      "location": "Shanghai → Madrid → Lugo",
-      "items": [
+      "title": "抵达西班牙 · Madrid → Lugo",
+      "locations": ["Shanghai", "Madrid", "Lugo"],
+
+      "schedule": [
         {
           "time": "00:45",
           "type": "flight",
-          "title": "MU709 · Shanghai → Madrid",
-          "notes": "China Eastern Airlines · Shanghai Pudong T1 → Madrid Barajas T1"
+          "text": "MU709 · Shanghai → Madrid"
         },
         {
           "time": "08:40",
-          "type": "arrival",
-          "title": "抵达 Madrid",
-          "location": "Madrid Barajas Airport T1"
+          "type": "flight",
+          "text": "抵达 Madrid Barajas Airport T1"
         },
         {
+          "time": "上午",
           "type": "transfer",
-          "title": "Madrid Airport → Chamartín",
-          "notes": "前往 Madrid Chamartín Clara Campoamor 搭乘 Lugo 火车。"
+          "text": "Madrid Airport → Madrid Chamartín Clara Campoamor",
+          "placeId": "madrid-chamartin"
         },
         {
           "time": "13:20",
-          "type": "train",
-          "title": "ALVIA 04325 · Madrid → Lugo",
-          "notes": "Coach 8 · Seat 3A"
+          "type": "transfer",
+          "text": "ALVIA 04325 · Madrid Chamartín → Lugo · Coach 8 · Seat 3A"
         },
         {
           "time": "18:06",
-          "type": "arrival",
-          "title": "抵达 Lugo"
+          "type": "transfer",
+          "text": "抵达 Lugo"
         },
         {
+          "time": "晚上",
           "type": "check-in",
-          "title": "Sercotel EsteOeste",
-          "location": "1 Praza de Santo Domingo, 27001 Lugo, Spain"
+          "text": "入住 Sercotel EsteOeste",
+          "placeId": "hotel-lugo"
         }
       ]
     },
 
     {
+      "day": 3,
+      "id": "day-03",
       "date": "2026-09-20",
-      "title": "🥾 Camino Day 1 · Lugo → San Román",
-      "location": "Lugo → San Román",
-      "items": [
+      "title": "Camino Day 1 · Lugo → San Román",
+      "locations": ["Lugo", "San Román"],
+
+      "schedule": [
         {
+          "time": "白天",
           "type": "hike",
-          "title": "Lugo → San Román",
-          "notes": "Camino walking stage."
+          "text": "Camino 徒步 · Lugo → San Román"
         },
         {
+          "time": "下午",
           "type": "check-in",
-          "title": "O Lar do Alecrín",
-          "location": "BURGO 13, 27235 Friol, Spain"
+          "text": "入住 O Lar do Alecrín",
+          "placeId": "hotel-san-roman"
         }
       ]
     },
 
     {
+      "day": 4,
+      "id": "day-04",
       "date": "2026-09-21",
-      "title": "🥾 Camino Day 2 · San Román → Melide",
-      "location": "San Román → Melide",
-      "items": [
+      "title": "Camino Day 2 · San Román → Melide",
+      "locations": ["San Román", "Melide"],
+
+      "schedule": [
         {
+          "time": "白天",
           "type": "hike",
-          "title": "San Román → Melide",
-          "notes": "Camino walking stage."
+          "text": "Camino 徒步 · San Román → Melide"
         },
         {
+          "time": "下午",
           "type": "check-in",
-          "title": "Pensión Praza das Coles",
-          "location": "1 Plaza Constitución, 15800 Melide, Spain"
+          "text": "入住 Pensión Praza das Coles",
+          "placeId": "hotel-melide"
         }
       ]
     },
 
     {
+      "day": 5,
+      "id": "day-05",
       "date": "2026-09-22",
-      "title": "🥾 Camino Day 3 · Melide → Arzúa",
-      "location": "Melide → Arzúa",
-      "items": [
+      "title": "Camino Day 3 · Melide → Arzúa",
+      "locations": ["Melide", "Arzúa"],
+
+      "schedule": [
         {
+          "time": "白天",
           "type": "hike",
-          "title": "Melide → Arzúa",
-          "notes": "Camino walking stage."
+          "text": "Camino 徒步 · Melide → Arzúa"
         },
         {
+          "time": "下午",
           "type": "check-in",
-          "title": "Pensión Boutique Maison Only",
-          "location": "Rúa Fraga do Rei 46, 15810 Arzúa, Spain"
+          "text": "入住 Pensión Boutique Maison Only",
+          "placeId": "hotel-arzua"
         }
       ]
     },
 
     {
+      "day": 6,
+      "id": "day-06",
       "date": "2026-09-23",
-      "title": "🥾 Camino Day 4 · Arzúa → O Pedrouzo",
-      "location": "Arzúa → O Pedrouzo",
-      "items": [
+      "title": "Camino Day 4 · Arzúa → O Pedrouzo",
+      "locations": ["Arzúa", "O Pedrouzo"],
+
+      "schedule": [
         {
+          "time": "白天",
           "type": "hike",
-          "title": "Arzúa → O Pedrouzo",
-          "notes": "Camino walking stage."
+          "text": "Camino 徒步 · Arzúa → O Pedrouzo"
         },
         {
+          "time": "下午",
           "type": "check-in",
-          "title": "PR Una Estrella Dorada",
-          "location": "Avenida de Lugo n 10-1, 15821 O Pedrouzo, Spain"
+          "text": "入住 PR Una Estrella Dorada",
+          "placeId": "hotel-pedrouzo"
         }
       ]
     },
 
     {
+      "day": 7,
+      "id": "day-07",
       "date": "2026-09-24",
-      "title": "🏁 Camino Day 5 · O Pedrouzo → Santiago",
-      "location": "O Pedrouzo → Santiago de Compostela",
-      "items": [
+      "title": "Camino Day 5 · 抵达 Santiago",
+      "locations": ["O Pedrouzo", "Santiago de Compostela"],
+
+      "schedule": [
         {
+          "time": "白天",
           "type": "hike",
-          "title": "O Pedrouzo → Santiago de Compostela",
-          "notes": "Final Camino walking stage."
+          "text": "Camino 徒步 · O Pedrouzo → Santiago de Compostela"
         },
         {
+          "time": "下午",
           "type": "check-in",
-          "title": "Rey Fernando",
-          "location": "Fernando III el Santo nº 30, 6º, 15701 Santiago de Compostela, Spain"
+          "text": "入住 Rey Fernando",
+          "placeId": "hotel-santiago"
         }
       ]
     },
 
     {
+      "day": 8,
+      "id": "day-08",
       "date": "2026-09-25",
-      "title": "🚆 Santiago → Madrid",
-      "location": "Santiago de Compostela → Madrid",
-      "items": [
+      "title": "Santiago → Madrid",
+      "locations": ["Santiago de Compostela", "Madrid"],
+
+      "schedule": [
         {
-          "type": "free",
-          "title": "Santiago free time",
-          "notes": "上午及中午自由活动。"
+          "time": "上午",
+          "type": "walk",
+          "text": "Santiago 自由活动"
         },
         {
           "time": "16:26",
-          "type": "train",
-          "title": "AVLO 04334 · Santiago → Madrid",
-          "notes": "Coach 4 · Seat 6A"
+          "type": "transfer",
+          "text": "AVLO 04334 · Santiago → Madrid · Coach 4 · Seat 6A"
         },
         {
           "time": "19:51",
-          "type": "arrival",
-          "title": "抵达 Madrid Chamartín"
+          "type": "transfer",
+          "text": "抵达 Madrid Chamartín"
         },
         {
+          "time": "晚上",
           "type": "check-in",
-          "title": "Micampus Madrid Sinesio Delgado Student Residence",
-          "location": "13 Calle de Sinesio Delgado, Tetuan, 28029 Madrid, Spain"
+          "text": "入住 Micampus Madrid Sinesio Delgado",
+          "placeId": "hotel-madrid"
         }
       ]
     },
 
     {
+      "day": 9,
+      "id": "day-09",
       "date": "2026-09-26",
-      "title": "🎨 Madrid · Art & City Day",
-      "location": "Madrid",
-      "items": [
+      "title": "Madrid · 艺术与城市",
+      "locations": ["Madrid"],
+
+      "schedule": [
         {
+          "id": "prado-visit",
           "time": "11:45",
           "type": "attraction",
-          "title": "Museo Nacional del Prado",
-          "notes": "BOOKED ✓ · General + Libro “La Guía del Prado” · €24"
+          "text": "Museo Nacional del Prado · 已购票",
+          "placeId": "prado",
+          "ticketIds": ["ticket-prado"]
         },
         {
+          "time": "待定",
           "type": "attraction",
-          "title": "Royal Palace of Madrid",
-          "notes": "Time TBC"
+          "text": "Royal Palace of Madrid · 时间待确认",
+          "placeId": "royal-palace",
+          "ticketIds": ["ticket-palace"]
         },
         {
+          "time": "待定",
           "type": "walk",
-          "title": "Retiro Park"
+          "text": "Retiro Park",
+          "placeId": "retiro"
         }
       ]
     },
 
     {
+      "day": 10,
+      "id": "day-10",
       "date": "2026-09-27",
-      "title": "🛍️ Madrid · Shopping Day",
-      "location": "Madrid",
-      "items": [
+      "title": "Madrid · Shopping Day",
+      "locations": ["Madrid"],
+
+      "schedule": [
         {
+          "time": "白天",
           "type": "shopping",
-          "title": "Luxury Shopping",
-          "notes": "Louis Vuitton / luxury shopping."
+          "text": "Luxury shopping · Louis Vuitton"
         },
         {
+          "time": "下午",
           "type": "shopping",
-          "title": "Souvenirs & Gifts"
+          "text": "购买普通礼物与纪念品"
         },
         {
-          "type": "todo",
-          "title": "Prepare Tax Refund",
-          "notes": "Keep receipts and tax-free documentation."
+          "time": "晚上",
+          "type": "note",
+          "text": "整理 Tax Free 退税文件与购物小票"
         }
       ]
     },
 
     {
+      "day": 11,
+      "id": "day-11",
       "date": "2026-09-28",
-      "title": "✈️ Madrid → Shanghai",
-      "location": "Madrid → Shanghai",
-      "items": [
+      "title": "离开西班牙 · Madrid → Shanghai",
+      "locations": ["Madrid", "Shanghai"],
+
+      "schedule": [
         {
           "time": "11:05",
           "type": "flight",
-          "title": "MU710 · Madrid → Shanghai",
-          "notes": "China Eastern Airlines · Madrid Barajas T1 → Shanghai Pudong T1 · Arrive Shanghai 05:40 on 29 Sep."
+          "text": "MU710 · Madrid T1 → Shanghai Pudong T1"
+        },
+        {
+          "time": "次日 05:40",
+          "type": "flight",
+          "text": "29 Sep 抵达 Shanghai"
         }
       ]
     }
@@ -448,228 +563,317 @@
 
   "places": [
     {
-      "name": "Madrid Barajas Airport T1",
-      "city": "Madrid"
-    },
-    {
+      "id": "madrid-chamartin",
       "name": "Madrid Chamartín Clara Campoamor",
-      "city": "Madrid"
+      "cityOrArea": "Madrid"
     },
+
     {
-      "name": "Lugo",
-      "city": "Lugo"
+      "id": "hotel-lugo",
+      "name": "Sercotel EsteOeste",
+      "cityOrArea": "Lugo",
+      "address": "1 Praza de Santo Domingo, 27001 Lugo, Spain"
     },
+
     {
-      "name": "San Román",
-      "city": "San Román"
+      "id": "hotel-san-roman",
+      "name": "O Lar do Alecrín",
+      "cityOrArea": "San Román",
+      "address": "BURGO 13, 27235 Friol, Spain"
     },
+
     {
-      "name": "Melide",
-      "city": "Melide"
+      "id": "hotel-melide",
+      "name": "Pensión Praza das Coles",
+      "cityOrArea": "Melide",
+      "address": "1 Plaza Constitución, 15800 Melide, Spain"
     },
+
     {
-      "name": "Arzúa",
-      "city": "Arzúa"
+      "id": "hotel-arzua",
+      "name": "Pensión Boutique Maison Only",
+      "cityOrArea": "Arzúa",
+      "address": "Rúa Fraga do Rei 46, 15810 Arzúa, Spain"
     },
+
     {
-      "name": "O Pedrouzo",
-      "city": "O Pedrouzo"
+      "id": "hotel-pedrouzo",
+      "name": "PR Una Estrella Dorada",
+      "cityOrArea": "O Pedrouzo",
+      "address": "Avenida de Lugo n 10-1, 15821 O Pedrouzo, Spain"
     },
+
     {
-      "name": "Santiago de Compostela",
-      "city": "Santiago de Compostela"
+      "id": "hotel-santiago",
+      "name": "Rey Fernando",
+      "cityOrArea": "Santiago de Compostela",
+      "address": "Fernando III el Santo nº 30, 6º, 15701 Santiago de Compostela, Spain"
     },
+
     {
+      "id": "hotel-madrid",
+      "name": "Micampus Madrid Sinesio Delgado Student Residence",
+      "cityOrArea": "Madrid",
+      "address": "13 Calle de Sinesio Delgado, Tetuan, 28029 Madrid, Spain"
+    },
+
+    {
+      "id": "prado",
       "name": "Museo Nacional del Prado",
-      "city": "Madrid",
-      "address": "Paseo del Prado s/n, 28014 Madrid"
+      "nameZh": "普拉多博物馆",
+      "cityOrArea": "Madrid",
+      "address": "Paseo del Prado s/n, 28014 Madrid, Spain"
     },
+
     {
+      "id": "royal-palace",
       "name": "Royal Palace of Madrid",
-      "city": "Madrid"
+      "nameZh": "马德里王宫",
+      "cityOrArea": "Madrid"
     },
+
     {
-      "name": "Retiro Park",
-      "city": "Madrid"
+      "id": "retiro",
+      "name": "El Retiro Park",
+      "nameZh": "丽池公园",
+      "cityOrArea": "Madrid"
     }
   ],
 
   "restaurants": [],
 
-  "bookingsAndTickets": [
-    {
-      "id": "train-madrid-lugo",
-      "type": "train",
-      "title": "ALVIA 04325 · Madrid → Lugo",
-      "date": "2026-09-19",
-      "status": "booked",
-      "notes": "13:20 → 18:06 · Coach 8 · Seat 3A"
-    },
-    {
-      "id": "train-santiago-madrid",
-      "type": "train",
-      "title": "AVLO 04334 · Santiago → Madrid",
-      "date": "2026-09-25",
-      "status": "booked",
-      "notes": "16:26 → 19:51 · Coach 4 · Seat 6A · €77"
-    },
-    {
-      "id": "prado-ticket",
-      "type": "attraction",
-      "title": "Museo Nacional del Prado",
-      "date": "2026-09-26",
-      "time": "11:45",
-      "status": "booked",
-      "price": 24.00,
-      "currency": "EUR",
-      "notes": "General + Libro “La Guía del Prado”"
-    }
-  ],
-
   "ticketPlanning": {
     "statusStorage": "local",
-    "statusStorageNote": "门票状态默认只保存在当前浏览器。",
+    "statusStorageNote": "门票状态保存在当前浏览器。",
+
     "items": [
       {
-        "name": "Museo Nacional del Prado",
-        "date": "2026-09-26",
-        "time": "11:45",
-        "status": "booked"
+        "id": "ticket-prado",
+        "day": 9,
+        "name": "普拉多博物馆",
+        "requirement": "advance-required",
+        "purchaseStatus": "purchased",
+        "scheduleItemIds": ["prado-visit"],
+        "guidance": [
+          "26 Sep 2026",
+          "11:45",
+          "General + La Guía del Prado",
+          "€24"
+        ]
       },
+
       {
-        "name": "Royal Palace of Madrid",
-        "date": "2026-09-26",
-        "status": "TBC"
+        "id": "ticket-palace",
+        "day": 9,
+        "name": "马德里王宫",
+        "requirement": "advance-recommended",
+        "purchaseStatus": "pending",
+        "scheduleMatchTerms": [
+          "Royal Palace"
+        ],
+        "guidance": [
+          "参观时间待确认"
+        ]
       }
     ]
   },
 
   "preTrip": {
-    "packingItems": [],
-    "preparationsExplicitlyMentioned": [
-      "Camino walking gear",
-      "Camino daypack",
-      "Luggage planning",
-      "Royal Palace ticket",
-      "Tax refund preparation"
+    "packingItems": [
+      {
+        "id": "camino-gear",
+        "text": "Camino 徒步装备"
+      },
+      {
+        "id": "daypack",
+        "text": "徒步背包 / Daypack"
+      },
+      {
+        "id": "blister",
+        "text": "水泡贴与足部护理用品"
+      }
     ],
-    "missingNote": "Remaining reservations and packing list to be confirmed."
+
+    "preparationsExplicitlyMentioned": [
+      "确认 Madrid Airport → Chamartín 交通",
+      "购买 / 确认 Madrid Royal Palace 门票",
+      "准备 Camino 徒步装备",
+      "准备 Tax Free 退税资料"
+    ],
+
+    "missingNote": "Camino 每日距离与海拔数据之后补充。"
   },
 
   "mapLinks": {
     "providedGoogleMapsLinks": [],
-    "note": "Exact Camino walking routes should be verified separately.",
+    "note": "住宿及景点可通过地点名称或地址打开地图。",
+
     "cityLevelNavigationDisabled": false,
+
     "navigationPolicy": {
       "noNavigationTypes": [
         "flight",
         "note",
         "rest"
       ],
+
       "selfNavigationTypes": [
-        "drive",
-        "return",
         "transfer",
         "check-in",
         "check-out",
         "restaurant",
         "attraction",
         "walk",
-        "hike"
+        "hike",
+        "shopping"
       ]
     },
+
     "navigationPlaces": []
   },
 
   "issuesAndUncertainties": [
-    "Royal Palace visit time and ticket are not yet confirmed.",
-    "Exact Camino walking distances and elevation profiles are not included yet.",
-    "Google Maps navigation links have not yet been added."
+    "Madrid Airport → Chamartín 的具体交通方式和时间尚未确认。",
+    "Royal Palace 参观时间及门票尚未确认。",
+    "Camino 每日实际距离及海拔数据尚未加入。"
   ],
 
   "map": {
     "schemaVersion": "1.0-lite",
     "mapMode": "template-auto",
     "templateId": "auto",
-    "disclaimer": "本图仅表达地点的相对方位与路线顺序，不代表真实比例或精确地理边界。",
+
+    "region": {
+      "id": "spain",
+      "label": "Spain",
+      "countryCode": "ES"
+    },
+
     "places": [
       {
-        "name": "Madrid",
-        "type": "city"
+        "id": "madrid",
+        "countryCode": "ES",
+        "mapRegionId": "spain"
       },
       {
-        "name": "Lugo",
-        "type": "city"
+        "id": "lugo",
+        "countryCode": "ES",
+        "mapRegionId": "spain"
       },
       {
-        "name": "San Román",
-        "type": "camino"
+        "id": "san-roman",
+        "countryCode": "ES",
+        "mapRegionId": "spain"
       },
       {
-        "name": "Melide",
-        "type": "camino"
+        "id": "melide",
+        "countryCode": "ES",
+        "mapRegionId": "spain"
       },
       {
-        "name": "Arzúa",
-        "type": "camino"
+        "id": "arzua",
+        "countryCode": "ES",
+        "mapRegionId": "spain"
       },
       {
-        "name": "O Pedrouzo",
-        "type": "camino"
+        "id": "o-pedrouzo",
+        "countryCode": "ES",
+        "mapRegionId": "spain"
       },
       {
-        "name": "Santiago de Compostela",
-        "type": "city"
+        "id": "santiago",
+        "countryCode": "ES",
+        "mapRegionId": "spain"
       }
     ],
 
     "routes": [
       {
-        "name": "Spain 2026",
-        "type": "travel",
-        "stops": [
-          "Madrid",
-          "Lugo",
-          "San Román",
-          "Melide",
-          "Arzúa",
-          "O Pedrouzo",
-          "Santiago de Compostela",
-          "Madrid"
+        "day": 2,
+        "placeIds": [
+          "madrid",
+          "lugo"
+        ]
+      },
+      {
+        "day": 3,
+        "placeIds": [
+          "lugo",
+          "san-roman"
+        ]
+      },
+      {
+        "day": 4,
+        "placeIds": [
+          "san-roman",
+          "melide"
+        ]
+      },
+      {
+        "day": 5,
+        "placeIds": [
+          "melide",
+          "arzua"
+        ]
+      },
+      {
+        "day": 6,
+        "placeIds": [
+          "arzua",
+          "o-pedrouzo"
+        ]
+      },
+      {
+        "day": 7,
+        "placeIds": [
+          "o-pedrouzo",
+          "santiago"
+        ]
+      },
+      {
+        "day": 8,
+        "placeIds": [
+          "santiago",
+          "madrid"
         ]
       }
     ],
 
     "dailyRoutes": [
       {
-        "date": "2026-09-20",
-        "from": "Lugo",
-        "to": "San Román",
-        "type": "hike"
+        "day": 3,
+        "placeIds": [
+          "lugo",
+          "san-roman"
+        ]
       },
       {
-        "date": "2026-09-21",
-        "from": "San Román",
-        "to": "Melide",
-        "type": "hike"
+        "day": 4,
+        "placeIds": [
+          "san-roman",
+          "melide"
+        ]
       },
       {
-        "date": "2026-09-22",
-        "from": "Melide",
-        "to": "Arzúa",
-        "type": "hike"
+        "day": 5,
+        "placeIds": [
+          "melide",
+          "arzua"
+        ]
       },
       {
-        "date": "2026-09-23",
-        "from": "Arzúa",
-        "to": "O Pedrouzo",
-        "type": "hike"
+        "day": 6,
+        "placeIds": [
+          "arzua",
+          "o-pedrouzo"
+        ]
       },
       {
-        "date": "2026-09-24",
-        "from": "O Pedrouzo",
-        "to": "Santiago de Compostela",
-        "type": "hike"
+        "day": 7,
+        "placeIds": [
+          "o-pedrouzo",
+          "santiago"
+        ]
       }
     ]
   }
