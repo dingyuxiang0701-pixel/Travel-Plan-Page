@@ -727,8 +727,14 @@ async function buildRegion(mapData, manifest) {
     const ids = (route.placeIds || []).filter((id) => placeById.has(id));
     const detailed = routePath(ids, placeById, route.day);
     const overview = routePath(overviewRouteIds(ids, overviewSet), placeById, route.day);
-    return { day: route.day, color: GOLDEN.routeColors[(route.day - 1) % GOLDEN.routeColors.length], placeIds: ids, paths: detailed ? [detailed] : [], overviewPaths: overview ? [overview] : [] };
-  });
+    return {
+    day: route.day,
+    color: GOLDEN.routeColors[(route.day - 1) % GOLDEN.routeColors.length],
+    placeIds: ids,
+    paths: detailed ? [detailed] : [],
+    overviewPaths: overview ? [overview] : []
+  };
+});
   const dailyDefinitions = mapData.dailyRoutes?.length ? mapData.dailyRoutes : mapData.routes;
   const dailyLayouts = Object.fromEntries(dailyDefinitions.map((daily) => {
     const ids = (daily.placeIds || []).filter((id) => placeById.has(id));
