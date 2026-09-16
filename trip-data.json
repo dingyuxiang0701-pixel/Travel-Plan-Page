@@ -190,16 +190,14 @@
       "checkOut": "2026-09-20",
       "address": "1 Praza de Santo Domingo, 27001 Lugo, Spain"
     },
-    {
-  "id": "o-burgo-de-negral",
-  "name": "O Burgo de Negral",
-  "countryCode": "ES",
-  "mapRegionId": "spain",
-  "geo": {
-    "lat": 42.95056,
-    "lng": -7.77392
-  }
-}
+{
+  "id": "hotel-o-lar-do-alecrin",
+  "name": "O Lar do Alecrín",
+  "cityOrArea": "O Burgo de Negral",
+  "checkIn": "2026-09-20",
+  "checkOut": "2026-09-21",
+  "address": "BURGO 13, 27235 Friol, Spain"
+},
     {
       "id": "hotel-melide",
       "name": "Pensión Praza das Coles",
