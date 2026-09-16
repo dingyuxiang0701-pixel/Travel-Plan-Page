@@ -709,19 +709,6 @@ async function buildRegion(mapData, manifest) {
     mapData.places,
     mapArea
   );
-
-  const occupied = [{ x: 18, y: 38, width: 335, height: 360 }, ...mapData.places.map((place) => {
-
-const points = separatePoints(
-  boundaryLayout(
-    mapData.places,
-    mapData.routes,
-    mapArea,
-    geoProjection
-  ),
-  mapData.places,
-  mapArea
-);
   
   const occupied = [{ x: 18, y: 38, width: 335, height: 360 }, ...mapData.places.map((place) => { const point = points.get(place.id); return { x: point.x - 17, y: point.y - 17, width: 34, height: 34 }; })];
   const renderedPlaces = mapData.places.map((place, index) => {
