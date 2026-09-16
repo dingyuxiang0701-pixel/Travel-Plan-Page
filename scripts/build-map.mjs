@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const MANIFEST_PATH = "assets/maps/templates/manifest.json";
+const COUNTRY_BOUNDARIES = path.join(ROOT, "assets", "boundaries", "countries");
 const GOLDEN = Object.freeze({
   width: 1448,
   height: 1086,
@@ -35,7 +36,19 @@ function absolute(value, fallback) {
 async function readJson(file) {
   return JSON.parse(await fs.readFile(file, "utf8"));
 }
+async function readCountryBoundary(countryCode) {
+  const code = String(countryCode || "").trim().toUpperCase();
+  if (!code) return null;
 
+  const file = path.join(COUNTRY_BOUNDARIES, `${code}.geojson`);
+
+  try {
+    return await readJson(file);
+  } catch (error) {
+    if (error?.code === "ENOENT") return null;
+    throw error;
+  }
+}
 async function writeJsonAtomically(file, value) {
   const temporaryFile = `${file}.${process.pid}.tmp`;
   try {
@@ -241,6 +254,130 @@ function projectedLayout(places, routes, area) {
   return points;
 }
 
+function collectBoundaryCoordinates(geojson) {
+  const coordinates = [];
+
+  function walk(value) {
+    if (!Array.isArray(value)) return;
+
+    if (
+      value.length >= 2 &&
+      typeof value[0] === "number" &&
+      typeof value[1] === "number"
+    ) {
+      coordinates.push({
+        lng: value[0],
+        lat: value[1]
+      });
+      return;
+    }
+
+    value.forEach(walk);
+  }
+
+  for (const feature of geojson?.features || []) {
+    walk(feature?.geometry?.coordinates);
+  }
+
+  return coordinates;
+}
+
+function createGeoProjection(geojson, area) {
+  const coordinates = collectBoundaryCoordinates(geojson);
+
+  if (!coordinates.length) return null;
+
+  const meanLat =
+    coordinates.reduce((sum, point) => sum + point.lat, 0) /
+    coordinates.length;
+
+  const factor = Math.max(
+    0.2,
+    Math.cos(meanLat * Math.PI / 180)
+  );
+
+  const projected = coordinates.map((point) => ({
+    x: point.lng * factor,
+    y: -point.lat
+  }));
+
+  const xs = projected.map((point) => point.x);
+  const ys = projected.map((point) => point.y);
+
+  const minX = Math.min(...xs);
+  const maxX = Math.max(...xs);
+  const minY = Math.min(...ys);
+  const maxY = Math.max(...ys);
+
+  const rangeX = maxX - minX;
+  const rangeY = maxY - minY;
+
+  if (rangeX <= 0 || rangeY <= 0) return null;
+
+  const padding = 0.08;
+
+  const usableWidth = area.width * (1 - padding * 2);
+  const usableHeight = area.height * (1 - padding * 2);
+
+  const scale = Math.min(
+    usableWidth / rangeX,
+    usableHeight / rangeY
+  );
+
+  const centerX = area.x + area.width / 2;
+  const centerY = area.y + area.height / 2;
+
+  const rawCenterX = (minX + maxX) / 2;
+  const rawCenterY = (minY + maxY) / 2;
+
+  return {
+    project(lat, lng) {
+      const rawX = lng * factor;
+      const rawY = -lat;
+
+      return {
+        x: centerX + (rawX - rawCenterX) * scale,
+        y: centerY + (rawY - rawCenterY) * scale
+      };
+    },
+
+    bounds: {
+      minLat: Math.min(...coordinates.map((point) => point.lat)),
+      maxLat: Math.max(...coordinates.map((point) => point.lat)),
+      minLng: Math.min(...coordinates.map((point) => point.lng)),
+      maxLng: Math.max(...coordinates.map((point) => point.lng))
+    }
+  };
+}
+
+function boundaryLayout(places, routes, area, geoProjection) {
+  if (!geoProjection) {
+    return projectedLayout(places, routes, area);
+  }
+
+  const points = new Map();
+
+  for (const place of places) {
+    const geo = finiteGeo(place);
+    if (!geo) continue;
+
+    const projected = geoProjection.project(geo.lat, geo.lng);
+
+    points.set(place.id, {
+      x: projected.x,
+      y: projected.y,
+      originalX: projected.x,
+      originalY: projected.y
+    });
+  }
+
+  if (points.size < 2) {
+    return projectedLayout(places, routes, area);
+  }
+
+  return points;
+}
+
 function hashText(value) {
   let hash = 2166136261;
   for (const character of String(value)) { hash ^= character.codePointAt(0); hash = Math.imul(hash, 16777619); }
@@ -425,11 +562,28 @@ function mapDataForRegion(mapData, region, regionCount) {
   return { ...mapData, region, places, routes, dailyRoutes };
 }
 
-function buildRegion(mapData, manifest) {
+async function buildRegion(mapData, manifest) {
   if (!mapData.places.length) return null;
+
   const selection = templateSelection(mapData, manifest);
   const template = selection.template;
-  const points = separatePoints(projectedLayout(mapData.places, mapData.routes, template.safeArea), mapData.places, template.safeArea);
+
+  const boundary = await readCountryBoundary(mapData.region.countryCode);
+  const geoProjection = boundary
+    ? createGeoProjection(boundary, template.safeArea)
+    : null;
+
+  const points = separatePoints(
+    boundaryLayout(
+      mapData.places,
+      mapData.routes,
+      template.safeArea,
+      geoProjection
+    ),
+    mapData.places,
+    template.safeArea
+  );
+  
   const occupied = [{ x: 18, y: 38, width: 335, height: 360 }, ...mapData.places.map((place) => { const point = points.get(place.id); return { x: point.x - 17, y: point.y - 17, width: 34, height: 34 }; })];
   const renderedPlaces = mapData.places.map((place, index) => {
     const point = points.get(place.id);
@@ -516,7 +670,13 @@ if (config.modules?.overview === false) {
   if (!Array.isArray(mapData.routes) || !mapData.routes.length) throw new Error("trip-data.json map.routes must contain routes");
 
   const definitions = destinationRegions(mapData, tripData);
-  const regions = definitions.map((definition) => buildRegion(mapDataForRegion(mapData, definition, definitions.length), manifest)).filter(Boolean);
+ const regions = (
+  await Promise.all(
+    definitions.map((definition) =>
+      buildRegion(mapDataForRegion(mapData, definition, definitions.length), manifest)
+    )
+  )
+).filter(Boolean);
   if (!regions.length) throw new Error("No destination map regions contain usable places");
   for (const region of regions) await fs.access(absolute(region.baseImage));
   const output = {
