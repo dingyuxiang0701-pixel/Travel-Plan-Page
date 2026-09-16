@@ -6,6 +6,15 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const MANIFEST_PATH = "assets/maps/templates/manifest.json";
 const COUNTRY_BOUNDARIES = path.join(ROOT, "assets", "boundaries", "countries");
+
+const GENERATED_MAPS = path.join(ROOT, "assets", "maps", "generated");
+
+const REAL_MAP_AREA = Object.freeze({
+  x: 300,
+  y: 110,
+  width: 1080,
+  height: 850
+});
 const GOLDEN = Object.freeze({
   width: 1448,
   height: 1086,
@@ -350,6 +359,109 @@ function createGeoProjection(geojson, area) {
   };
 }
 
+function geoJsonToSvgPaths(geojson, geoProjection) {
+  if (!geojson || !geoProjection) return [];
+
+  const paths = [];
+
+  function ringToPath(ring) {
+    if (!Array.isArray(ring) || ring.length < 3) return "";
+
+    const points = ring
+      .filter(
+        (coordinate) =>
+          Array.isArray(coordinate) &&
+          Number.isFinite(Number(coordinate[0])) &&
+          Number.isFinite(Number(coordinate[1]))
+      )
+      .map(([lng, lat]) => geoProjection.project(Number(lat), Number(lng)));
+
+    if (points.length < 3) return "";
+
+    return (
+      `M ${points[0].x.toFixed(2)} ${points[0].y.toFixed(2)} ` +
+      points
+        .slice(1)
+        .map((point) => `L ${point.x.toFixed(2)} ${point.y.toFixed(2)}`)
+        .join(" ") +
+      " Z"
+    );
+  }
+
+  function polygonToPath(polygon) {
+    if (!Array.isArray(polygon)) return "";
+
+    return polygon
+      .map(ringToPath)
+      .filter(Boolean)
+      .join(" ");
+  }
+
+  for (const feature of geojson.features || []) {
+    const geometry = feature?.geometry;
+    if (!geometry) continue;
+
+    if (geometry.type === "Polygon") {
+      const pathData = polygonToPath(geometry.coordinates);
+      if (pathData) paths.push(pathData);
+    }
+
+    if (geometry.type === "MultiPolygon") {
+      for (const polygon of geometry.coordinates || []) {
+        const pathData = polygonToPath(polygon);
+        if (pathData) paths.push(pathData);
+      }
+    }
+  }
+
+  return paths;
+}
+
+async function writeBoundarySvg(countryCode, geojson, geoProjection) {
+  if (!geojson || !geoProjection) return null;
+
+  const code = String(countryCode || "").trim().toLowerCase();
+  if (!code) return null;
+
+  const paths = geoJsonToSvgPaths(geojson, geoProjection);
+  if (!paths.length) return null;
+
+  await fs.mkdir(GENERATED_MAPS, { recursive: true });
+
+  const fileName = `${code}.svg`;
+  const filePath = path.join(GENERATED_MAPS, fileName);
+
+  const pathMarkup = paths
+    .map(
+      (pathData) =>
+        `<path d="${pathData}" fill="#eee8dc" stroke="#756f66" stroke-width="2.2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`
+    )
+    .join("\n");
+
+  const svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="${GOLDEN.width}"
+  height="${GOLDEN.height}"
+  viewBox="0 0 ${GOLDEN.width} ${GOLDEN.height}"
+>
+  <rect
+    width="${GOLDEN.width}"
+    height="${GOLDEN.height}"
+    fill="#f7f3ea"
+  />
+
+  <g fill-rule="evenodd">
+    ${pathMarkup}
+  </g>
+</svg>
+`;
+
+  await fs.writeFile(filePath, svg, "utf8");
+
+  return `assets/maps/generated/${fileName}`;
+}
+
 function boundaryLayout(places, routes, area, geoProjection) {
   if (!geoProjection) {
     return projectedLayout(places, routes, area);
@@ -569,20 +681,47 @@ async function buildRegion(mapData, manifest) {
   const template = selection.template;
 
   const boundary = await readCountryBoundary(mapData.region.countryCode);
+
+  const mapArea = boundary
+    ? REAL_MAP_AREA
+    : template.safeArea;
+
   const geoProjection = boundary
-    ? createGeoProjection(boundary, template.safeArea)
+    ? createGeoProjection(boundary, mapArea)
     : null;
+
+  const generatedBoundaryImage =
+    boundary && geoProjection
+      ? await writeBoundarySvg(
+          mapData.region.countryCode,
+          boundary,
+          geoProjection
+        )
+      : null;
 
   const points = separatePoints(
     boundaryLayout(
       mapData.places,
       mapData.routes,
-      template.safeArea,
+      mapArea,
       geoProjection
     ),
     mapData.places,
-    template.safeArea
+    mapArea
   );
+
+  const occupied = [{ x: 18, y: 38, width: 335, height: 360 }, ...mapData.places.map((place) => {
+
+const points = separatePoints(
+  boundaryLayout(
+    mapData.places,
+    mapData.routes,
+    mapArea,
+    geoProjection
+  ),
+  mapData.places,
+  mapArea
+);
   
   const occupied = [{ x: 18, y: 38, width: 335, height: 360 }, ...mapData.places.map((place) => { const point = points.get(place.id); return { x: point.x - 17, y: point.y - 17, width: 34, height: 34 }; })];
   const renderedPlaces = mapData.places.map((place, index) => {
@@ -625,7 +764,7 @@ async function buildRegion(mapData, manifest) {
     days,
     canvas: { width: GOLDEN.width, height: GOLDEN.height },
     projection: { type: "relative-schematic", bounds: null },
-    baseImage: template.file,
+    baseImage: generatedBoundaryImage || template.file,
     title: mapData.region.title || mapData.title || `${mapData.region.label} · 旅行路线`,
     ariaLabel: `${mapData.region.label}模板化旅行路线示意图，共${days.length}天`,
     description: mapData.region.description,
