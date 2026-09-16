@@ -191,13 +191,15 @@
       "address": "1 Praza de Santo Domingo, 27001 Lugo, Spain"
     },
     {
-      "id": "hotel-san-roman",
-      "name": "O Lar do Alecrín",
-      "cityOrArea": "San Román",
-      "checkIn": "2026-09-20",
-      "checkOut": "2026-09-21",
-      "address": "BURGO 13, 27235 Friol, Spain"
-    },
+  "id": "o-burgo-de-negral",
+  "name": "O Burgo de Negral",
+  "countryCode": "ES",
+  "mapRegionId": "spain",
+  "geo": {
+    "lat": 42.95056,
+    "lng": -7.77392
+  }
+}
     {
       "id": "hotel-melide",
       "name": "Pensión Praza das Coles",
