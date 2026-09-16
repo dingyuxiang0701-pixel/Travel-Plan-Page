@@ -749,45 +749,50 @@
       "countryCode": "ES"
     },
 
-    "places": [
+   "places": [
   {
-    "id": "Madrid",
+    "id": "madrid",
+    "name": "Madrid",
     "countryCode": "ES",
-    "mapRegionId": "Spain",
+    "mapRegionId": "spain",
     "geo": {
       "lat": 40.4168,
       "lng": -3.7038
     }
   },
   {
-    "id": "Lugo",
+    "id": "lugo",
+    "name": "Lugo",
     "countryCode": "ES",
-    "mapRegionId": "Spain",
+    "mapRegionId": "spain",
     "geo": {
       "lat": 43.0121,
       "lng": -7.5559
     }
   },
   {
-    "id": "San-roman",
+    "id": "san-roman",
+    "name": "San Román",
     "countryCode": "ES",
-    "mapRegionId": "Spain",
+    "mapRegionId": "spain",
     "geo": {
       "lat": 42.98,
       "lng": -7.78
     }
   },
   {
-    "id": "Melide",
+    "id": "melide",
+    "name": "Melide",
     "countryCode": "ES",
-    "mapRegionId": "Spain",
+    "mapRegionId": "spain",
     "geo": {
       "lat": 42.9138,
       "lng": -8.0149
     }
   },
   {
-    "id": "Arzúa",
+    "id": "arzua",
+    "name": "Arzúa",
     "countryCode": "ES",
     "mapRegionId": "spain",
     "geo": {
@@ -796,7 +801,8 @@
     }
   },
   {
-    "id": "O Pedrouzo",
+    "id": "o-pedrouzo",
+    "name": "O Pedrouzo",
     "countryCode": "ES",
     "mapRegionId": "spain",
     "geo": {
@@ -805,7 +811,8 @@
     }
   },
   {
-    "id": "Santiago",
+    "id": "santiago",
+    "name": "Santiago de Compostela",
     "countryCode": "ES",
     "mapRegionId": "spain",
     "geo": {
