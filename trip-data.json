@@ -750,42 +750,70 @@
     },
 
     "places": [
-      {
-        "id": "madrid",
-        "countryCode": "ES",
-        "mapRegionId": "spain"
-      },
-      {
-        "id": "lugo",
-        "countryCode": "ES",
-        "mapRegionId": "spain"
-      },
-      {
-        "id": "san-roman",
-        "countryCode": "ES",
-        "mapRegionId": "spain"
-      },
-      {
-        "id": "melide",
-        "countryCode": "ES",
-        "mapRegionId": "spain"
-      },
-      {
-        "id": "arzua",
-        "countryCode": "ES",
-        "mapRegionId": "spain"
-      },
-      {
-        "id": "o-pedrouzo",
-        "countryCode": "ES",
-        "mapRegionId": "spain"
-      },
-      {
-        "id": "santiago",
-        "countryCode": "ES",
-        "mapRegionId": "spain"
-      }
-    ],
+  {
+    "id": "madrid",
+    "countryCode": "ES",
+    "mapRegionId": "spain",
+    "geo": {
+      "lat": 40.4168,
+      "lng": -3.7038
+    }
+  },
+  {
+    "id": "lugo",
+    "countryCode": "ES",
+    "mapRegionId": "spain",
+    "geo": {
+      "lat": 43.0121,
+      "lng": -7.5559
+    }
+  },
+  {
+    "id": "san-roman",
+    "countryCode": "ES",
+    "mapRegionId": "spain",
+    "geo": {
+      "lat": 42.98,
+      "lng": -7.78
+    }
+  },
+  {
+    "id": "melide",
+    "countryCode": "ES",
+    "mapRegionId": "spain",
+    "geo": {
+      "lat": 42.9138,
+      "lng": -8.0149
+    }
+  },
+  {
+    "id": "arzua",
+    "countryCode": "ES",
+    "mapRegionId": "spain",
+    "geo": {
+      "lat": 42.9282,
+      "lng": -8.1641
+    }
+  },
+  {
+    "id": "o-pedrouzo",
+    "countryCode": "ES",
+    "mapRegionId": "spain",
+    "geo": {
+      "lat": 42.9047,
+      "lng": -8.3625
+    }
+  },
+  {
+    "id": "santiago",
+    "countryCode": "ES",
+    "mapRegionId": "spain",
+    "geo": {
+      "lat": 42.8782,
+      "lng": -8.5448
+    }
+  }
+],
 
     "routes": [
       {
