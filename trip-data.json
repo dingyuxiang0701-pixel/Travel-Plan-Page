@@ -1,7 +1,6 @@
 {
   "$schema": "./schemas/trip-data.schema.json",
   "schemaVersion": "2.0-lite",
-
   "config": {
     "schemaVersion": "1.0.0",
     "modules": {
@@ -17,19 +16,22 @@
       "mode": "local"
     }
   },
-
   "metadata": {
     "tripId": "spain-2026",
     "title": "Spain 2026 🇪🇸",
-    "timeZone": "Europe/Madrid"
+    "timeZone": "Europe/Madrid",
+    "language": "zh-CN",
+    "assets": {
+      "routeMaps": [
+        "assets/maps/generated/es.svg"
+      ]
+    }
   },
-
   "trip": {
     "status": "planned",
     "startDate": "2026-09-18",
     "endDate": "2026-09-28",
     "dayCount": 11,
-
     "countries": [
       {
         "code": "AU",
@@ -50,11 +52,9 @@
         "nameEn": "Spain"
       }
     ],
-
     "primaryDestinationCountries": [
       "ES"
     ],
-
     "citiesAndAreas": [
       "Madrid",
       "Lugo",
@@ -64,10 +64,8 @@
       "O Pedrouzo",
       "Santiago de Compostela"
     ],
-
     "routeSummary": "Madrid → Lugo → San Román → Melide → Arzúa → O Pedrouzo → Santiago de Compostela → Madrid"
   },
-
   "flightJourneys": [
     {
       "id": "outbound-spain",
@@ -78,19 +76,16 @@
       "title": "马德里 → 上海"
     }
   ],
-
   "flights": [
     {
       "id": "mu738",
       "journeyId": "outbound-spain",
       "sequence": 1,
       "flightNumber": "MU738",
-
       "airline": {
         "name": "China Eastern Airlines",
         "nameZh": "中国东方航空"
       },
-
       "departure": {
         "date": "2026-09-18",
         "time": "11:00",
@@ -100,7 +95,6 @@
         "terminal": "T2",
         "utcOffset": "+10:00"
       },
-
       "arrival": {
         "date": "2026-09-18",
         "time": "19:50",
@@ -111,22 +105,18 @@
         "utcOffset": "+08:00"
       }
     },
-
     {
       "id": "mu709",
       "journeyId": "outbound-spain",
       "sequence": 2,
       "flightNumber": "MU709",
-
       "airline": {
         "name": "China Eastern Airlines",
         "nameZh": "中国东方航空"
       },
-
       "connectionFromPrevious": {
         "plannedDurationText": "上海中转 4小时55分"
       },
-
       "departure": {
         "date": "2026-09-19",
         "time": "00:45",
@@ -136,7 +126,6 @@
         "terminal": "T1",
         "utcOffset": "+08:00"
       },
-
       "arrival": {
         "date": "2026-09-19",
         "time": "08:40",
@@ -147,18 +136,15 @@
         "utcOffset": "+02:00"
       }
     },
-
     {
       "id": "mu710",
       "journeyId": "return-spain",
       "sequence": 1,
       "flightNumber": "MU710",
-
       "airline": {
         "name": "China Eastern Airlines",
         "nameZh": "中国东方航空"
       },
-
       "departure": {
         "date": "2026-09-28",
         "time": "11:05",
@@ -168,7 +154,6 @@
         "terminal": "T1",
         "utcOffset": "+02:00"
       },
-
       "arrival": {
         "date": "2026-09-29",
         "time": "05:40",
@@ -180,7 +165,6 @@
       }
     }
   ],
-
   "accommodations": [
     {
       "id": "hotel-lugo",
@@ -190,14 +174,14 @@
       "checkOut": "2026-09-20",
       "address": "1 Praza de Santo Domingo, 27001 Lugo, Spain"
     },
-{
-  "id": "hotel-o-lar-do-alecrin",
-  "name": "O Lar do Alecrín",
-  "cityOrArea": "O Burgo de Negral",
-  "checkIn": "2026-09-20",
-  "checkOut": "2026-09-21",
-  "address": "BURGO 13, 27235 Friol, Spain"
-},
+    {
+      "id": "hotel-o-lar-do-alecrin",
+      "name": "O Lar do Alecrín",
+      "cityOrArea": "O Burgo de Negral",
+      "checkIn": "2026-09-20",
+      "checkOut": "2026-09-21",
+      "address": "BURGO 13, 27235 Friol, Spain"
+    },
     {
       "id": "hotel-melide",
       "name": "Pensión Praza das Coles",
@@ -239,10 +223,8 @@
       "address": "13 Calle de Sinesio Delgado, Tetuan, 28029 Madrid, Spain"
     }
   ],
-
   "groundTransport": {
     "rentalCar": null,
-
     "publicTransitAndRail": [
       {
         "id": "train-madrid-lugo",
@@ -257,7 +239,6 @@
         "seat": "3A",
         "status": "booked"
       },
-
       {
         "id": "train-santiago-madrid",
         "date": "2026-09-25",
@@ -273,15 +254,16 @@
       }
     ]
   },
-
   "days": [
     {
       "day": 1,
       "id": "day-01",
       "date": "2026-09-18",
       "title": "出发 · Melbourne → Shanghai",
-      "locations": ["Melbourne", "Shanghai"],
-
+      "locations": [
+        "Melbourne",
+        "Shanghai"
+      ],
       "schedule": [
         {
           "time": "11:00",
@@ -295,14 +277,16 @@
         }
       ]
     },
-
     {
       "day": 2,
       "id": "day-02",
       "date": "2026-09-19",
       "title": "抵达西班牙 · Madrid → Lugo",
-      "locations": ["Shanghai", "Madrid", "Lugo"],
-
+      "locations": [
+        "Shanghai",
+        "Madrid",
+        "Lugo"
+      ],
       "schedule": [
         {
           "time": "00:45",
@@ -338,14 +322,15 @@
         }
       ]
     },
-
     {
       "day": 3,
       "id": "day-03",
       "date": "2026-09-20",
       "title": "Camino Day 1 · Lugo → San Román",
-      "locations": ["Lugo", "San Román"],
-
+      "locations": [
+        "Lugo",
+        "San Román"
+      ],
       "schedule": [
         {
           "time": "白天",
@@ -360,14 +345,15 @@
         }
       ]
     },
-
     {
       "day": 4,
       "id": "day-04",
       "date": "2026-09-21",
       "title": "Camino Day 2 · San Román → Melide",
-      "locations": ["San Román", "Melide"],
-
+      "locations": [
+        "San Román",
+        "Melide"
+      ],
       "schedule": [
         {
           "time": "白天",
@@ -382,14 +368,15 @@
         }
       ]
     },
-
     {
       "day": 5,
       "id": "day-05",
       "date": "2026-09-22",
       "title": "Camino Day 3 · Melide → Arzúa",
-      "locations": ["Melide", "Arzúa"],
-
+      "locations": [
+        "Melide",
+        "Arzúa"
+      ],
       "schedule": [
         {
           "time": "白天",
@@ -404,14 +391,15 @@
         }
       ]
     },
-
     {
       "day": 6,
       "id": "day-06",
       "date": "2026-09-23",
       "title": "Camino Day 4 · Arzúa → O Pedrouzo",
-      "locations": ["Arzúa", "O Pedrouzo"],
-
+      "locations": [
+        "Arzúa",
+        "O Pedrouzo"
+      ],
       "schedule": [
         {
           "time": "白天",
@@ -426,14 +414,15 @@
         }
       ]
     },
-
     {
       "day": 7,
       "id": "day-07",
       "date": "2026-09-24",
       "title": "Camino Day 5 · 抵达 Santiago",
-      "locations": ["O Pedrouzo", "Santiago de Compostela"],
-
+      "locations": [
+        "O Pedrouzo",
+        "Santiago de Compostela"
+      ],
       "schedule": [
         {
           "time": "白天",
@@ -448,14 +437,15 @@
         }
       ]
     },
-
     {
       "day": 8,
       "id": "day-08",
       "date": "2026-09-25",
       "title": "Santiago → Madrid",
-      "locations": ["Santiago de Compostela", "Madrid"],
-
+      "locations": [
+        "Santiago de Compostela",
+        "Madrid"
+      ],
       "schedule": [
         {
           "time": "上午",
@@ -480,14 +470,14 @@
         }
       ]
     },
-
     {
       "day": 9,
       "id": "day-09",
       "date": "2026-09-26",
       "title": "Madrid · 艺术与城市",
-      "locations": ["Madrid"],
-
+      "locations": [
+        "Madrid"
+      ],
       "schedule": [
         {
           "id": "prado-visit",
@@ -495,14 +485,18 @@
           "type": "attraction",
           "text": "Museo Nacional del Prado · 已购票",
           "placeId": "prado",
-          "ticketIds": ["ticket-prado"]
+          "ticketIds": [
+            "ticket-prado"
+          ]
         },
         {
           "time": "待定",
           "type": "attraction",
           "text": "Royal Palace of Madrid · 时间待确认",
           "placeId": "royal-palace",
-          "ticketIds": ["ticket-palace"]
+          "ticketIds": [
+            "ticket-palace"
+          ]
         },
         {
           "time": "待定",
@@ -512,14 +506,14 @@
         }
       ]
     },
-
     {
       "day": 10,
       "id": "day-10",
       "date": "2026-09-27",
       "title": "Madrid · Shopping Day",
-      "locations": ["Madrid"],
-
+      "locations": [
+        "Madrid"
+      ],
       "schedule": [
         {
           "time": "白天",
@@ -538,14 +532,15 @@
         }
       ]
     },
-
     {
       "day": 11,
       "id": "day-11",
       "date": "2026-09-28",
       "title": "离开西班牙 · Madrid → Shanghai",
-      "locations": ["Madrid", "Shanghai"],
-
+      "locations": [
+        "Madrid",
+        "Shanghai"
+      ],
       "schedule": [
         {
           "time": "11:05",
@@ -560,63 +555,54 @@
       ]
     }
   ],
-
   "places": [
     {
       "id": "madrid-chamartin",
       "name": "Madrid Chamartín Clara Campoamor",
       "cityOrArea": "Madrid"
     },
-
     {
       "id": "hotel-lugo",
       "name": "Sercotel EsteOeste",
       "cityOrArea": "Lugo",
       "address": "1 Praza de Santo Domingo, 27001 Lugo, Spain"
     },
-
     {
       "id": "hotel-san-roman",
       "name": "O Lar do Alecrín",
       "cityOrArea": "San Román",
       "address": "BURGO 13, 27235 Friol, Spain"
     },
-
     {
       "id": "hotel-melide",
       "name": "Pensión Praza das Coles",
       "cityOrArea": "Melide",
       "address": "1 Plaza Constitución, 15800 Melide, Spain"
     },
-
     {
       "id": "hotel-arzua",
       "name": "Pensión Boutique Maison Only",
       "cityOrArea": "Arzúa",
       "address": "Rúa Fraga do Rei 46, 15810 Arzúa, Spain"
     },
-
     {
       "id": "hotel-pedrouzo",
       "name": "PR Una Estrella Dorada",
       "cityOrArea": "O Pedrouzo",
       "address": "Avenida de Lugo n 10-1, 15821 O Pedrouzo, Spain"
     },
-
     {
       "id": "hotel-santiago",
       "name": "Rey Fernando",
       "cityOrArea": "Santiago de Compostela",
       "address": "Fernando III el Santo nº 30, 6º, 15701 Santiago de Compostela, Spain"
     },
-
     {
       "id": "hotel-madrid",
       "name": "Micampus Madrid Sinesio Delgado Student Residence",
       "cityOrArea": "Madrid",
       "address": "13 Calle de Sinesio Delgado, Tetuan, 28029 Madrid, Spain"
     },
-
     {
       "id": "prado",
       "name": "Museo Nacional del Prado",
@@ -624,14 +610,12 @@
       "cityOrArea": "Madrid",
       "address": "Paseo del Prado s/n, 28014 Madrid, Spain"
     },
-
     {
       "id": "royal-palace",
       "name": "Royal Palace of Madrid",
       "nameZh": "马德里王宫",
       "cityOrArea": "Madrid"
     },
-
     {
       "id": "retiro",
       "name": "El Retiro Park",
@@ -639,13 +623,10 @@
       "cityOrArea": "Madrid"
     }
   ],
-
   "restaurants": [],
-
   "ticketPlanning": {
     "statusStorage": "local",
     "statusStorageNote": "门票状态保存在当前浏览器。",
-
     "items": [
       {
         "id": "ticket-prado",
@@ -653,7 +634,9 @@
         "name": "普拉多博物馆",
         "requirement": "advance-required",
         "purchaseStatus": "purchased",
-        "scheduleItemIds": ["prado-visit"],
+        "scheduleItemIds": [
+          "prado-visit"
+        ],
         "guidance": [
           "26 Sep 2026",
           "11:45",
@@ -661,7 +644,6 @@
           "€24"
         ]
       },
-
       {
         "id": "ticket-palace",
         "day": 9,
@@ -677,7 +659,6 @@
       }
     ]
   },
-
   "preTrip": {
     "packingItems": [
       {
@@ -693,30 +674,24 @@
         "text": "水泡贴与足部护理用品"
       }
     ],
-
     "preparationsExplicitlyMentioned": [
       "确认 Madrid Airport → Chamartín 交通",
       "购买 / 确认 Madrid Royal Palace 门票",
       "准备 Camino 徒步装备",
       "准备 Tax Free 退税资料"
     ],
-
     "missingNote": "Camino 每日距离与海拔数据之后补充。"
   },
-
   "mapLinks": {
     "providedGoogleMapsLinks": [],
     "note": "住宿及景点可通过地点名称或地址打开地图。",
-
     "cityLevelNavigationDisabled": false,
-
     "navigationPolicy": {
       "noNavigationTypes": [
         "flight",
         "note",
         "rest"
       ],
-
       "selfNavigationTypes": [
         "transfer",
         "check-in",
@@ -728,100 +703,94 @@
         "shopping"
       ]
     },
-
     "navigationPlaces": []
   },
-
   "issuesAndUncertainties": [
     "Madrid Airport → Chamartín 的具体交通方式和时间尚未确认。",
     "Royal Palace 参观时间及门票尚未确认。",
     "Camino 每日实际距离及海拔数据尚未加入。"
   ],
-
   "map": {
     "schemaVersion": "1.0-lite",
     "mapMode": "template-auto",
     "templateId": "auto",
-
     "region": {
       "id": "spain",
       "label": "Spain",
       "countryCode": "ES"
     },
-
-   "places": [
-  {
-    "id": "madrid",
-    "name": "Madrid",
-    "countryCode": "ES",
-    "mapRegionId": "spain",
-    "geo": {
-      "lat": 40.4168,
-      "lng": -3.7038
-    }
-  },
-  {
-    "id": "lugo",
-    "name": "Lugo",
-    "countryCode": "ES",
-    "mapRegionId": "spain",
-    "geo": {
-      "lat": 43.0121,
-      "lng": -7.5559
-    }
-  },
-  {
-    "id": "san-roman",
-    "name": "San Román",
-    "countryCode": "ES",
-    "mapRegionId": "spain",
-    "geo": {
-      "lat": 42.98,
-      "lng": -7.78
-    }
-  },
-  {
-    "id": "melide",
-    "name": "Melide",
-    "countryCode": "ES",
-    "mapRegionId": "spain",
-    "geo": {
-      "lat": 42.9138,
-      "lng": -8.0149
-    }
-  },
-  {
-    "id": "arzua",
-    "name": "Arzúa",
-    "countryCode": "ES",
-    "mapRegionId": "spain",
-    "geo": {
-      "lat": 42.9282,
-      "lng": -8.1641
-    }
-  },
-  {
-    "id": "o-pedrouzo",
-    "name": "O Pedrouzo",
-    "countryCode": "ES",
-    "mapRegionId": "spain",
-    "geo": {
-      "lat": 42.9047,
-      "lng": -8.3625
-    }
-  },
-  {
-    "id": "santiago",
-    "name": "Santiago de Compostela",
-    "countryCode": "ES",
-    "mapRegionId": "spain",
-    "geo": {
-      "lat": 42.8782,
-      "lng": -8.5448
-    }
-  }
-],
-
+    "places": [
+      {
+        "id": "madrid",
+        "name": "Madrid",
+        "countryCode": "ES",
+        "mapRegionId": "spain",
+        "geo": {
+          "lat": 40.4168,
+          "lng": -3.7038
+        }
+      },
+      {
+        "id": "lugo",
+        "name": "Lugo",
+        "countryCode": "ES",
+        "mapRegionId": "spain",
+        "geo": {
+          "lat": 43.0121,
+          "lng": -7.5559
+        }
+      },
+      {
+        "id": "san-roman",
+        "name": "San Román",
+        "countryCode": "ES",
+        "mapRegionId": "spain",
+        "geo": {
+          "lat": 42.98,
+          "lng": -7.78
+        }
+      },
+      {
+        "id": "melide",
+        "name": "Melide",
+        "countryCode": "ES",
+        "mapRegionId": "spain",
+        "geo": {
+          "lat": 42.9138,
+          "lng": -8.0149
+        }
+      },
+      {
+        "id": "arzua",
+        "name": "Arzúa",
+        "countryCode": "ES",
+        "mapRegionId": "spain",
+        "geo": {
+          "lat": 42.9282,
+          "lng": -8.1641
+        }
+      },
+      {
+        "id": "o-pedrouzo",
+        "name": "O Pedrouzo",
+        "countryCode": "ES",
+        "mapRegionId": "spain",
+        "geo": {
+          "lat": 42.9047,
+          "lng": -8.3625
+        }
+      },
+      {
+        "id": "santiago",
+        "name": "Santiago de Compostela",
+        "countryCode": "ES",
+        "mapRegionId": "spain",
+        "geo": {
+          "lat": 42.8782,
+          "lng": -8.5448
+        }
+      }
+    ],
     "routes": [
       {
         "day": 2,
@@ -873,7 +842,6 @@
         ]
       }
     ],
-
     "dailyRoutes": [
       {
         "day": 3,
@@ -909,6 +877,456 @@
           "o-pedrouzo",
           "santiago"
         ]
+      }
+    ]
+  },
+  "routeMap": {
+    "defaultRegionId": "spain",
+    "regions": [
+      {
+        "id": "spain",
+        "label": "Spain",
+        "countryCode": "ES",
+        "scope": "template-schematic",
+        "mapMode": "frozen-template",
+        "templateId": "river-highland",
+        "mapModeReason": "separated-clusters-or-long-jump",
+        "mapModeMetrics": {
+          "placeCount": 7,
+          "geoPlaceCount": 7,
+          "widthKm": 395.69,
+          "heightKm": 288.08,
+          "spanKm": 486.39,
+          "averageNearestKm": 74.65,
+          "components": 1,
+          "largestLegKm": 486.39,
+          "jumpRatio": 26.19
+        },
+        "days": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "canvas": {
+          "width": 1448,
+          "height": 1086
+        },
+        "projection": {
+          "type": "relative-schematic",
+          "bounds": null
+        },
+        "baseImage": "assets/maps/generated/es.svg",
+        "title": "Spain · 旅行路线",
+        "ariaLabel": "Spain模板化旅行路线示意图，共7天",
+        "disclaimer": "本图为模板化行程示意图，仅表达地点的相对方位与路线顺序，不代表真实比例或精确地理边界。如需使用真实国家或城市地图，可在生成后自行调整。",
+        "heading": {
+          "text": "Spain",
+          "x": 33,
+          "y": 105,
+          "size": 40
+        },
+        "legend": {
+          "x": 35,
+          "y": 168,
+          "gap": 43
+        },
+        "annotations": [],
+        "routes": [
+          {
+            "day": 2,
+            "color": "#e77e22",
+            "placeIds": [
+              "madrid",
+              "lugo"
+            ],
+            "paths": [
+              "M952.78 329.38 C947.6 266.1 925.7 209.2 888.37 162.16"
+            ],
+            "overviewPaths": [
+              "M952.78 329.38 C947.6 266.1 925.7 209.2 888.37 162.16"
+            ]
+          },
+          {
+            "day": 3,
+            "color": "#618344",
+            "placeIds": [
+              "lugo",
+              "san-roman"
+            ],
+            "paths": [
+              "M888.37 162.16 C835.4 204.3 775.2 228.8 711.36 234.08"
+            ],
+            "overviewPaths": [
+              "M888.37 162.16 C835.4 204.3 775.2 228.8 711.36 234.08"
+            ]
+          },
+          {
+            "day": 4,
+            "color": "#209aaa",
+            "placeIds": [
+              "san-roman",
+              "melide"
+            ],
+            "paths": [
+              "M711.36 234.08 C764.8 260.1 821.1 269.5 876.85 261.88"
+            ],
+            "overviewPaths": [
+              "M711.36 234.08 C764.8 260.1 821.1 269.5 876.85 261.88"
+            ]
+          },
+          {
+            "day": 5,
+            "color": "#8865a5",
+            "placeIds": [
+              "melide",
+              "arzua"
+            ],
+            "paths": [
+              "M876.85 261.88 C815.9 233.7 767.5 191.3 734.35 137.09"
+            ],
+            "overviewPaths": [
+              "M876.85 261.88 C815.9 233.7 767.5 191.3 734.35 137.09"
+            ]
+          },
+          {
+            "day": 6,
+            "color": "#df6185",
+            "placeIds": [
+              "arzua",
+              "o-pedrouzo"
+            ],
+            "paths": [
+              "M734.35 137.09 C751.7 166.1 775.4 188.1 804.26 201.77"
+            ],
+            "overviewPaths": [
+              "M734.35 137.09 C751.7 166.1 775.4 188.1 804.26 201.77"
+            ]
+          },
+          {
+            "day": 7,
+            "color": "#397dc1",
+            "placeIds": [
+              "o-pedrouzo",
+              "santiago"
+            ],
+            "paths": [
+              "M804.26 201.77 C806.9 235.9 800.2 268.1 784.32 296.4"
+            ],
+            "overviewPaths": [
+              "M804.26 201.77 C806.9 235.9 800.2 268.1 784.32 296.4"
+            ]
+          },
+          {
+            "day": 8,
+            "color": "#e77e22",
+            "placeIds": [
+              "santiago",
+              "madrid"
+            ],
+            "paths": [
+              "M784.32 296.4 C838.3 324.5 895.6 335.7 952.78 329.38"
+            ],
+            "overviewPaths": [
+              "M784.32 296.4 C838.3 324.5 895.6 335.7 952.78 329.38"
+            ]
+          }
+        ],
+        "places": [
+          {
+            "id": "madrid",
+            "x": 952.78,
+            "y": 329.38,
+            "color": "#e77e22",
+            "tx": 984.78,
+            "ty": 297.38,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "Madrid"
+            ],
+            "query": "Madrid Spain",
+            "geo": {
+              "lat": 40.4168,
+              "lng": -3.7038
+            },
+            "days": [
+              2,
+              8
+            ]
+          },
+          {
+            "id": "lugo",
+            "x": 888.37,
+            "y": 162.16,
+            "color": "#e77e22",
+            "tx": 966.37,
+            "ty": 100.16,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "Lugo"
+            ],
+            "query": "Lugo Spain",
+            "geo": {
+              "lat": 43.0121,
+              "lng": -7.5559
+            },
+            "days": [
+              2,
+              3
+            ]
+          },
+          {
+            "id": "san-roman",
+            "x": 711.36,
+            "y": 234.08,
+            "color": "#618344",
+            "tx": 633.36,
+            "ty": 172.08,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "San Román"
+            ],
+            "query": "San Román Spain",
+            "geo": {
+              "lat": 42.98,
+              "lng": -7.78
+            },
+            "days": [
+              3,
+              4
+            ]
+          },
+          {
+            "id": "melide",
+            "x": 876.85,
+            "y": 261.88,
+            "color": "#209aaa",
+            "tx": 1014.85,
+            "ty": 173.88,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "Melide"
+            ],
+            "query": "Melide Spain",
+            "geo": {
+              "lat": 42.9138,
+              "lng": -8.0149
+            },
+            "days": [
+              4,
+              5
+            ]
+          },
+          {
+            "id": "arzua",
+            "x": 734.35,
+            "y": 137.09,
+            "color": "#8865a5",
+            "tx": 596.35,
+            "ty": 49.09,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "Arzúa"
+            ],
+            "query": "Arzúa Spain",
+            "geo": {
+              "lat": 42.9282,
+              "lng": -8.1641
+            },
+            "days": [
+              5,
+              6
+            ]
+          },
+          {
+            "id": "o-pedrouzo",
+            "x": 804.26,
+            "y": 201.77,
+            "color": "#df6185",
+            "tx": 666.26,
+            "ty": 303.77,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "O Pedrouzo"
+            ],
+            "query": "O Pedrouzo Spain",
+            "geo": {
+              "lat": 42.9047,
+              "lng": -8.3625
+            },
+            "days": [
+              6,
+              7
+            ]
+          },
+          {
+            "id": "santiago",
+            "x": 784.32,
+            "y": 296.4,
+            "color": "#397dc1",
+            "tx": 862.32,
+            "ty": 372.4,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "Santiago de Compostela"
+            ],
+            "query": "Santiago de Compostela Spain",
+            "geo": {
+              "lat": 42.8782,
+              "lng": -8.5448
+            },
+            "days": [
+              7,
+              8
+            ]
+          }
+        ],
+        "overviewPlaceIds": [
+          "madrid",
+          "lugo",
+          "san-roman",
+          "melide",
+          "arzua",
+          "o-pedrouzo",
+          "santiago"
+        ],
+        "dailyLayouts": {
+          "3": {
+            "places": [
+              "lugo",
+              "san-roman"
+            ],
+            "labels": {
+              "lugo": {
+                "x": 966.37,
+                "y": 100.16,
+                "anchor": "start"
+              },
+              "san-roman": {
+                "x": 633.36,
+                "y": 172.08,
+                "anchor": "end"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 799.87,
+                "y": 198.12
+              }
+            ]
+          },
+          "4": {
+            "places": [
+              "san-roman",
+              "melide"
+            ],
+            "labels": {
+              "san-roman": {
+                "x": 633.36,
+                "y": 172.08,
+                "anchor": "end"
+              },
+              "melide": {
+                "x": 1014.85,
+                "y": 173.88,
+                "anchor": "start"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 794.11,
+                "y": 247.98
+              }
+            ]
+          },
+          "5": {
+            "places": [
+              "melide",
+              "arzua"
+            ],
+            "labels": {
+              "melide": {
+                "x": 1014.85,
+                "y": 173.88,
+                "anchor": "start"
+              },
+              "arzua": {
+                "x": 596.35,
+                "y": 49.09,
+                "anchor": "end"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 805.6,
+                "y": 199.49
+              }
+            ]
+          },
+          "6": {
+            "places": [
+              "arzua",
+              "o-pedrouzo"
+            ],
+            "labels": {
+              "arzua": {
+                "x": 596.35,
+                "y": 49.09,
+                "anchor": "end"
+              },
+              "o-pedrouzo": {
+                "x": 666.26,
+                "y": 303.77,
+                "anchor": "end"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 769.31,
+                "y": 169.43
+              }
+            ]
+          },
+          "7": {
+            "places": [
+              "o-pedrouzo",
+              "santiago"
+            ],
+            "labels": {
+              "o-pedrouzo": {
+                "x": 666.26,
+                "y": 303.77,
+                "anchor": "end"
+              },
+              "santiago": {
+                "x": 862.32,
+                "y": 372.4,
+                "anchor": "start"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 794.29,
+                "y": 249.08
+              }
+            ]
+          }
+        }
       }
     ]
   }
